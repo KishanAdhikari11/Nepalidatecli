@@ -1,11 +1,9 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
 	"os"
+
+	cc "github.com/ivanpirog/coloredcobra"
 
 	"github.com/spf13/cobra"
 )
@@ -14,10 +12,19 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "nepalidate",
 	Short: "A simple cli app written in golang that displays nepalidate",
-	Long:  `Cli app that displays nepali date, time, festivals, next two holidays,count days remaining for holiday`,
+	Long:  `Cli app that displays nepali date, time, festivals, panchang, thithi and english date.`,
 }
 
 func Execute() {
+	cc.Init(&cc.Config{
+		RootCmd:  rootCmd,
+		Headings: cc.HiCyan + cc.Bold + cc.Underline,
+		Commands: cc.HiYellow + cc.Bold,
+		Example:  cc.Italic,
+		ExecName: cc.Bold,
+		Flags:    cc.Bold,
+	})
+
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
@@ -25,13 +32,6 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.nepalidate.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -1,11 +1,7 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
+	scrapper "nepalidate/Nepalidatescrapper"
 
 	"github.com/spf13/cobra"
 )
@@ -17,7 +13,7 @@ var nepalidateCmd = &cobra.Command{
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:`,
 	Run: func(cmd *cobra.Command, args []string) {
-		getRandomJoke()
+		GetNepaliDate()
 
 	},
 }
@@ -27,36 +23,40 @@ func init() {
 
 }
 
-type Jokes struct {
-	ID     string `json:"id"`
-	Joke   string `json:"joke"`
-	Status int    `json:"Status"`
+func GetNepaliDate() {
+	scrapper.Scrape()
 }
 
-func getRandomJoke() {
-	url := "https://icanhazdadjoke.com/"
-	responseBytes := getJokeData(url)
-	random := Jokes{}
-	json.Unmarshal(responseBytes, &random)
-	fmt.Println(string(random.Joke))
+// type Jokes struct {
+// 	ID     string `json:"id"`
+// 	Joke   string `json:"joke"`
+// 	Status int    `json:"Status"`
+// }
 
-}
-func getJokeData(baseAPI string) []byte {
-	req, err := http.NewRequest("GET", baseAPI, nil)
-	if err != nil {
-		log.Println(err)
-	}
-	req.Header.Add("Accept", "application/json")
-	req.Header.Add("User-Agent", "NepaliDate/1.0")
+// func getRandomJoke() {
+// 	url := "https://icanhazdadjoke.com/"
+// 	responseBytes := getJokeData(url)
+// 	random := Jokes{}
+// 	json.Unmarshal(responseBytes, &random)
+// 	fmt.Println(string(random.Joke))
 
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		log.Printf("Could not make a request %v", err)
-	}
-	responseBytes, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Println(err)
-	}
-	return responseBytes
+// }
+// func getJokeData(baseAPI string) []byte {
+// 	req, err := http.NewRequest("GET", baseAPI, nil)
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+// 	req.Header.Add("Accept", "application/json")
+// 	req.Header.Add("User-Agent", "NepaliDate/1.0")
 
-}
+// 	res, err := http.DefaultClient.Do(req)
+// 	if err != nil {
+// 		log.Printf("Could not make a request %v", err)
+// 	}
+// 	responseBytes, err := ioutil.ReadAll(res.Body)
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+// 	return responseBytes
+
+// }

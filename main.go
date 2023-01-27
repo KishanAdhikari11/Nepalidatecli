@@ -1,11 +1,11 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
-*/
 package main
 
-import "nepalidate/cmd"
+import (
+	nepalidateapi "nepalidate/NepalidateApi"
+)
 
 func main() {
-	cmd.Execute()
+	// cmd.Execute()
+	nepalidateapi.NepaliDateApi()
+
 }

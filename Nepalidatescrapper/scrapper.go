@@ -2,6 +2,7 @@ package Nepalidatescrapper
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/gocolly/colly"
 )
@@ -15,7 +16,7 @@ type NepaliDate struct {
 	Time        string `json:"time"`
 }
 
-func Scrape() {
+func Scrape() NepaliDate {
 	c := colly.NewCollector()
 	date := NepaliDate{}
 
@@ -44,11 +45,15 @@ func Scrape() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Printf("Date : %s \n", date.Date)
-	fmt.Printf("Time : %s \n", date.Time)
-	fmt.Printf("English Date : %s \n", date.EnglishDate)
-	fmt.Printf("Event : %s \n", date.Event)
-	fmt.Printf("Panchang : %s \n", date.Panchang)
-	fmt.Printf("Thithi : %s \n", date.Thithi)
+	CleanStruct(&date)
+	return date
+
+}
+
+func CleanStruct(s *NepaliDate) {
+	s.Thithi = strings.TrimSpace(s.Thithi)
+	s.Panchang = strings.Replace(s.Panchang, "पञ्चाङ्ग:", "", -1)
+	s.Panchang = strings.TrimSpace(s.Panchang)
+	s.Event = strings.TrimSpace(s.Event)
 
 }

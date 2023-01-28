@@ -1,30 +1,43 @@
 package cmd
 
 import (
+	"fmt"
+	scrapper "nepalidate/Nepalidatescrapper"
 	"os"
 
-	cc "github.com/ivanpirog/coloredcobra"
+	"github.com/fatih/color"
 
 	"github.com/spf13/cobra"
 )
 
-// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "nepalidate",
-	Short: "A simple cli app written in golang that displays nepalidate",
-	Long:  `Cli app that displays nepali date, time, festivals, panchang, thithi and english date.`,
+	Use:                   "nepalidate ",
+	DisableFlagsInUseLine: true,
+	CompletionOptions: cobra.CompletionOptions{
+		DisableDefaultCmd: true,
+	},
+
+	Short: "Nepali date CLI",
+	Long:  `A simple cli app written in golang that displays nepalidate, time, festivals, panchang, thithi and english date.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		//wrap these things inside a table
+		aaja := scrapper.Scrape()
+
+		blue := color.New(color.FgBlue).SprintFunc()
+		// green := color.New(color.FgCyan).SprintFunc()
+		green := color.New(color.FgGreen).SprintFunc()
+
+		fmt.Println(blue("Nepali Date: "), green(aaja.Date))
+		fmt.Println(blue("English Date: "), green(aaja.EnglishDate))
+		fmt.Println(blue("Time: "), green(aaja.Time))
+		fmt.Println(blue("Thithi: "), green(aaja.Thithi))
+		fmt.Println(blue("Panchang: "), green(aaja.Panchang))
+		fmt.Println(blue("Event: "), green(aaja.Event))
+
+	},
 }
 
 func Execute() {
-	cc.Init(&cc.Config{
-		RootCmd:  rootCmd,
-		Headings: cc.HiCyan + cc.Bold + cc.Underline,
-		Commands: cc.HiYellow + cc.Bold,
-		Example:  cc.Italic,
-		ExecName: cc.Bold,
-		Flags:    cc.Bold,
-	})
-
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
@@ -33,5 +46,4 @@ func Execute() {
 
 func init() {
 
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

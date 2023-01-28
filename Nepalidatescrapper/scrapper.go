@@ -53,6 +53,8 @@ func Scrape() NepaliDate {
 func CleanStruct(s *NepaliDate) {
 	s.Thithi = strings.TrimSpace(s.Thithi)
 	s.Panchang = strings.Replace(s.Panchang, "पञ्चाङ्ग:", "", -1)
+	s.Panchang = strings.Replace(s.Panchang, ",", "", -1)
+
 	s.Panchang = strings.TrimSpace(s.Panchang)
 	s.Event = strings.TrimSpace(s.Event)
 

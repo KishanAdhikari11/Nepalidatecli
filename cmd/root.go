@@ -23,16 +23,16 @@ var rootCmd = &cobra.Command{
 		//wrap these things inside a table
 		aaja := scrapper.Scrape()
 
-		blue := color.New(color.FgBlue).SprintFunc()
-		// green := color.New(color.FgCyan).SprintFunc()
 		green := color.New(color.FgGreen).SprintFunc()
-
-		fmt.Println(blue("Nepali Date: "), green(aaja.Date))
-		fmt.Println(blue("English Date: "), green(aaja.EnglishDate))
-		fmt.Println(blue("Time: "), green(aaja.Time))
-		fmt.Println(blue("Thithi: "), green(aaja.Thithi))
-		fmt.Println(blue("Panchang: "), green(aaja.Panchang))
-		fmt.Println(blue("Event: "), green(aaja.Event))
+		cyan := color.New(color.FgCyan).SprintFunc()
+		fmt.Printf("\n")
+		fmt.Println(cyan("\t\tDate(B.S):  "), green(aaja.Date))
+		fmt.Println(cyan("\t\tDate(A.D):  "), green(aaja.EnglishDate))
+		fmt.Println(cyan("\t\tTime:      "), green(aaja.Time))
+		fmt.Println(cyan("\t\tEvents:     "), green(aaja.Event))
+		fmt.Println(cyan("\t\tPanchang:   "), green(aaja.Panchang))
+		fmt.Println(cyan("\t\tThithi:     "), green(aaja.Thithi))
+		fmt.Printf("\n")
 
 	},
 }

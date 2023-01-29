@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	Short: "Nepali date CLI",
 	Long:  `A simple cli app written in golang that displays nepalidate, time, festivals, panchang, thithi and english date.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		//wrap these things inside a table
+		
 		aaja := scrapper.Scrape()
 
 		green := color.New(color.FgGreen).SprintFunc()

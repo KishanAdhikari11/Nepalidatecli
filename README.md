@@ -3,7 +3,11 @@ A command line interface (CLI) app written in Go (golang) that displays the curr
 Available commands
 - nepalidate
 
-To install this cli use 
+To install this cli clone this repo using
+```
+git clone https://github.com/kishanAd/Nepalidatecli
+```
+and use this command 
 ```
 go install 
 nepalidate 

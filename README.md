@@ -5,7 +5,7 @@ Available commands
 
 To install this cli clone this repo using
 ```
-git clone https://github.com/kishanAd/Nepalidatecli
+git clone https://github.com/KishanAdhikari11/Nepalidatecli
 ```
 and use this command 
 ```

@@ -10,6 +10,9 @@ git clone https://github.com/KishanAdhikari11/Nepalidatecli
 and use this command 
 ```
 go install 
+go  build -o nepalidate
+sudo mv nepalidate  /usr/local/bin
+sudo chmod +x /usr/local/bin/nepalidate
 nepalidate 
 ```
 ![Screenshot from 2023-01-29 20-12-24](https://user-images.githubusercontent.com/61057393/215333063-c4b5b7aa-5cdf-4094-9cad-495c7e0bc867.png)
